@@ -1,0 +1,178 @@
+api_exercise_model_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_exercise_model_view:
+    path:  /{exerciseModelId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_create:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:create }
+    methods: [POST]
+    requirements:
+        _format: json
+
+api_exercise_model_edit:
+    path:  /{exerciseModelId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        exercise_modelId: \d+
+
+api_exercise_model_delete:
+    path:  /{exerciseModelId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:delete }
+    methods: [DELETE]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_subscribe:
+    path:  /{exerciseModelId}/subscribe
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:subscribe }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_duplicate:
+    path:  /{exerciseModelId}/duplicate
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:duplicate }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_import:
+    path:  /{exerciseModelId}/import
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModel:import }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_add_required_resource:
+    path:  /{exerciseModelId}/required-resources/{reqResId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredResourceByExerciseModel:add }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+        reqResId: \d+
+
+api_exercise_model_delete_required_resource:
+    path:  /{exerciseModelId}/required-resources/{reqResId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredResourceByExerciseModel:delete }
+    methods: [DELETE]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+        reqResId: \d+
+
+api_exercise_model_update_required_resource:
+    path:  /{exerciseModelId}/required-resources/
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredResourceByExerciseModel:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_model_add_required_knowledge:
+    path:  /{exerciseModelId}/required-knowledges/{reqKnoId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredKnowledgeByExerciseModel:add }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+        reqKnoId: \d+
+
+api_exercise_model_delete_required_knowledge:
+    path:  /{exerciseModelId}/required-knowledges/{reqKnoId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredKnowledgeByExerciseModel:delete }
+    methods: [DELETE]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+        reqKnoId: \d+
+
+api_exercise_model_update_required_knowledge:
+    path:  /{exerciseModelId}/required-knowledges/
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/RequiredKnowledgeByExerciseModel:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_list_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_edit_all_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:editAll }
+    methods: [PUT]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_view_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/{metadataKey}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_create_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_update_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/{metadataKey}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_metadata_delete_by_exercise_model:
+    path:  /{exerciseModelId}/metadatas/{metadataKey}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/MetadataByExerciseModel:delete }
+    methods: [DELETE]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+
+api_exercise_generate_by_exercise_model:
+    path:  /{exerciseModelId}/exercises/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/ExerciseByExerciseModel:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_list_by_exercise_model:
+    path:  /{exerciseModelId}/exercises/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/ExerciseByExerciseModel:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseModelId: \d+

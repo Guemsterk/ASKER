@@ -1,0 +1,53 @@
+api_test_model_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/Test/TestModel:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_test_model_view:
+    path:  /{testModelId}
+    defaults: { _controller: AskerBundle:Api/Test/TestModel:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        testModelId: \d+
+
+api_test_model_create:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/Test/TestModel:create }
+    methods: [POST]
+    requirements:
+        _format: json
+
+api_test_model_edit:
+    path:  /{testModelId}
+    defaults: { _controller: AskerBundle:Api/Test/TestModel:edit }
+    methods: [PUT]
+    requirements:
+        _format: json
+        testModelId: \d+
+
+api_test_model_delete:
+    path:  /{testModelId}
+    defaults: { _controller: AskerBundle:Api/Test/TestModel:delete }
+    methods: [DELETE]
+    requirements:
+        _format: json
+        testModelId: \d+
+
+api_test_generate:
+    path:  /{testModelId}/tests/
+    defaults: { _controller: AskerBundle:Api/Test/TestByTestModel:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        testModelId: \d+
+
+api_test_list_by_test_model:
+    path:  /{testModelId}/tests/
+    defaults: { _controller: AskerBundle:Api/Test/TestByTestModel:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        testModelId: \d+

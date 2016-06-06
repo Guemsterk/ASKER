@@ -1,0 +1,6 @@
+api_upload_image:
+    path:  /upload-image
+    defaults: { _controller: AskerBundle:Api/ExerciseResource/Resource:uploadImage }
+    methods: [POST]
+    requirements:
+        _format: json

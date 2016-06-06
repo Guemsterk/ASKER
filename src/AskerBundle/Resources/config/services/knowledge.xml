@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asker.exercise.knowledge.class">AskerBundle\Service\Exercise\DomainKnowledge\KnowledgeService</parameter>
+        <parameter key="asker.exercise.entity.knowledge.class">AskerBundle\Entity\DomainKnowledge\Knowledge</parameter>
+        <parameter key="asker.exercise.repository.knowledge.class">AskerBundle\Repository\Exercise\DomainKnowledge\KnowledgeRepository</parameter>
+
+        <parameter key="asker.exercise.knowledge.formula.class">AskerBundle\Service\Exercise\DomainKnowledge\FormulaService</parameter>
+
+        <parameter key="asker.exercise.knowledge_metadata.class">AskerBundle\Service\Exercise\DomainKnowledge\MetadataService</parameter>
+        <parameter key="asker.exercise.entity.knowledge_metadata.class">AskerBundle\Entity\DomainKnowledge\Metadata</parameter>
+        <parameter key="asker.exercise.repository.knowledge_metadata.class">AskerBundle\Repository\Exercise\DomainKnowledge\MetadataRepository</parameter>
+    </parameters>
+
+    <services>
+        <!-- Repository -->
+        <service id="asker.exercise.repository.knowledge" class="%asker.exercise.repository.knowledge.class%">
+			<factory service="doctrine" method="getRepository" />
+            <argument>%asker.exercise.entity.knowledge.class%</argument>
+        </service>
+
+        <service id="asker.exercise.repository.knowledge_metadata" class="%asker.exercise.repository.knowledge_metadata.class%">
+			<factory service="doctrine" method="getRepository" />
+            <argument>%asker.exercise.entity.knowledge_metadata.class%</argument>
+        </service>
+
+        <!-- General services -->
+        <service id="asker.exercise.knowledge" class="%asker.exercise.knowledge.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setEntityRepository">
+                <argument type="service" id="asker.exercise.repository.knowledge"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+            <call method="setMetadataService">
+                <argument type="service" id="asker.exercise.knowledge_metadata"/>
+            </call>
+            <call method="setUserService">
+                <argument type="service" id="asker.exercise.user"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.knowledge_metadata" class="%asker.exercise.knowledge_metadata.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setMetadataRepository">
+                <argument type="service" id="asker.exercise.repository.knowledge_metadata"/>
+            </call>
+            <call method="setEntityService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+        </service>
+
+        <!-- Specific knowledge services -->
+        <service id="asker.exercise.knowledge.formula" class="%asker.exercise.knowledge.formula.class%"/>
+    </services>
+</container>

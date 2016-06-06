@@ -1,0 +1,39 @@
+api_item_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/Item:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_item_view:
+    path:  /{itemId}
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/Item:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        itemId: \d+
+
+api_item_add_answer:
+    path:  /{itemId}/answers/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AnswerByItem:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        itemId: \d+
+
+api_answer_list_by_item:
+    path:  /{itemId}/answers/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AnswerByItem:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        itemId: \d+
+
+api_answer_by_item_view:
+    path:  /{itemId}/answers/{answerId}
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AnswerByItem:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        itemId: \d+
+        answerId: \d+

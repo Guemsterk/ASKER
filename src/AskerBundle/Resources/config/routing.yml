@@ -1,0 +1,57 @@
+asker_homepage:
+    path:     /asker/
+    defaults: { _controller: AskerBundle:Default:index }
+
+api_attempted_exercise_models:
+    resource: "@AskerBundle/Resources/config/routing/api/attempted_model.yml"
+    prefix:   /asker/api/attempted-models/
+
+api_exercise_models:
+    resource: "@AskerBundle/Resources/config/routing/api/exercise_model.yml"
+    prefix:   /asker/api/exercise-models/
+
+api_exercises:
+    resource: "@AskerBundle/Resources/config/routing/api/exercise.yml"
+    prefix:   /asker/api/exercises/
+
+api_items:
+    resource: "@AskerBundle/Resources/config/routing/api/item.yml"
+    prefix:   /asker/api/items/
+
+api_resources:
+    resource: "@AskerBundle/Resources/config/routing/api/resource.yml"
+    prefix:   /asker/api/resources/
+
+api_test_models:
+    resource: "@AskerBundle/Resources/config/routing/api/test_model.yml"
+    prefix:   /asker/api/test-models/
+
+api_tests:
+    resource: "@AskerBundle/Resources/config/routing/api/test.yml"
+    prefix:   /asker/api/tests/
+
+api_test_attempts:
+    resource: "@AskerBundle/Resources/config/routing/api/test_attempt.yml"
+    prefix:   /asker/api/test-attempts/
+
+api_attempts:
+    resource: "@AskerBundle/Resources/config/routing/api/attempt.yml"
+    prefix:   /asker/api/attempts/
+
+api_domain_knowledges:
+    resource: "@AskerBundle/Resources/config/routing/api/knowledge.yml"
+    prefix:   /asker/api/knowledges/
+
+
+api_domain_users:
+    resource: "@AskerBundle/Resources/config/routing/api/user.yml"
+    prefix:   /asker/api/users/
+
+
+frontend:
+    resource: "@AskerBundle/Resources/config/routing/frontend/frontend.yml"
+    prefix:   /front/
+
+api_upload:
+    resource: "@AskerBundle/Resources/config/routing/api/upload.yml"
+    prefix:   /asker/api/

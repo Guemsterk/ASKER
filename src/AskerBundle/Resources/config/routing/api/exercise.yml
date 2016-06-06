@@ -1,0 +1,38 @@
+api_exercise_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/Exercise:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_exercise_view:
+    path:  /{exerciseId}
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/Exercise:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseId: \d+
+
+api_item_list_by_exercise:
+    path:  /{exerciseId}/items/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/ItemByExercise:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseId: \d+
+
+api_attempts_list_by_exercise:
+    path:  /{exerciseId}/attempts/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AttemptByExercise:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseId: \d+
+
+api_attempts_create_by_exercise:
+    path:  /{exerciseId}/attempts/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AttemptByExercise:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        exerciseId: \d+

@@ -1,0 +1,345 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <imports>
+        <import resource="services/exercise_model.xml"/>
+        <import resource="services/resource.xml"/>
+        <import resource="services/knowledge.xml"/>
+        <import resource="services/user.xml"/>
+        <import resource="services/listeners.xml"/>
+        <import resource="services/converters.xml"/>
+    </imports>
+
+    <parameters>
+        <parameter key="asker.exercise.exercise.class">AskerBundle\Service\Exercise\ExerciseCreation\ExerciseService</parameter>
+
+        <parameter key="asker.exercise.multiple_choice.class">AskerBundle\Service\Exercise\ExerciseCreation\MultipleChoiceService</parameter>
+        <parameter key="asker.exercise.pair_items.class">AskerBundle\Service\Exercise\ExerciseCreation\PairItemsService</parameter>
+        <parameter key="asker.exercise.group_items.class">AskerBundle\Service\Exercise\ExerciseCreation\GroupItemsService</parameter>
+        <parameter key="asker.exercise.order_items.class">AskerBundle\Service\Exercise\ExerciseCreation\OrderItemsService</parameter>
+        <parameter key="asker.exercise.open_ended_question.class">AskerBundle\Service\Exercise\ExerciseCreation\OpenEndedQuestionService</parameter>
+
+        <parameter key="asker.exercise.stored_exercise.class">AskerBundle\Service\Exercise\CreatedExercise\StoredExerciseService</parameter>
+        <parameter key="asker.exercise.entity.stored_exercise.class">AskerBundle\Entity\CreatedExercise\StoredExercise</parameter>
+        <parameter key="asker.exercise.repository.stored_exercise.class">AskerBundle\Repository\Exercise\CreatedExercise\AnswerRepository</parameter>
+
+        <parameter key="asker.exercise.answer.class">AskerBundle\Service\Exercise\CreatedExercise\AnswerService</parameter>
+        <parameter key="asker.exercise.entity.answer.class">AskerBundle\Entity\CreatedExercise\Answer</parameter>
+        <parameter key="asker.exercise.repository.answer.class">AskerBundle\Repository\Exercise\CreatedExercise\AnswerRepository</parameter>
+
+        <parameter key="asker.exercise.attempt.class">AskerBundle\Service\Exercise\CreatedExercise\AttemptService</parameter>
+        <parameter key="asker.exercise.entity.attempt.class">AskerBundle\Entity\CreatedExercise\Attempt</parameter>
+        <parameter key="asker.exercise.repository.attempt.class">AskerBundle\Repository\Exercise\CreatedExercise\AttemptRepository</parameter>
+
+        <parameter key="asker.exercise.item.class">AskerBundle\Service\Exercise\CreatedExercise\ItemService</parameter>
+        <parameter key="asker.exercise.entity.item.class">AskerBundle\Entity\CreatedExercise\Item</parameter>
+        <parameter key="asker.exercise.repository.item.class">AskerBundle\Repository\Exercise\CreatedExercise\ItemRepository</parameter>
+
+        <parameter key="asker.exercise.test.class">AskerBundle\Service\Exercise\Test\TestService</parameter>
+        <parameter key="asker.exercise.entity.test.class">AskerBundle\Entity\Test\Test</parameter>
+        <parameter key="asker.exercise.repository.test.class">AskerBundle\Repository\Exercise\Test\TestRepository</parameter>
+
+        <parameter key="asker.exercise.test_model.class">AskerBundle\Service\Exercise\Test\TestModelService</parameter>
+        <parameter key="asker.exercise.entity.test_model.class">AskerBundle\Entity\Test\TestModel</parameter>
+        <parameter key="asker.exercise.repository.test_model.class">AskerBundle\Repository\Exercise\Test\TestModelRepository</parameter>
+
+        <parameter key="asker.exercise.entity.test_model_position.class">AskerBundle\Entity\Test\TestModelPosition</parameter>
+        <parameter key="asker.exercise.repository.test_model_position.class">AskerBundle\Repository\Exercise\Test\TestModelPositionRepository</parameter>
+
+        <parameter key="asker.exercise.test_attempt.class">AskerBundle\Service\Exercise\Test\TestAttemptService</parameter>
+        <parameter key="asker.exercise.entity.test_attempt.class">AskerBundle\Entity\Test\TestAttempt</parameter>
+        <parameter key="asker.exercise.repository.test_attempt.class">AskerBundle\Repository\Exercise\Test\TestAttemptRepository</parameter>
+
+        <parameter key="asker.exercise.resource_metadata.class">AskerBundle\Service\Exercise\ExerciseResource\MetadataService</parameter>
+        <parameter key="asker.exercise.entity.resource_metadata.class">AskerBundle\Entity\ExerciseResource\Metadata</parameter>
+        <parameter key="asker.exercise.repository.resource_metadata.class">AskerBundle\Repository\Exercise\ExerciseResource\MetadataRepository</parameter>
+
+        <parameter key="asker.exercise.serializer.class">AskerBundle\Service\Serializer\Serializer</parameter>
+    </parameters>
+
+    <services>
+        <!-- REPOSITORIES -->
+
+        <!-- Stored exercise Repository -->
+        <service id="asker.exercise.repository.stored_exercise" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.stored_exercise.class%">
+            <argument>%asker.exercise.entity.stored_exercise.class%</argument>
+        </service>
+
+        <!-- Answer Repository -->
+        <service id="asker.exercise.repository.answer" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.answer.class%">
+            <argument>%asker.exercise.entity.answer.class%</argument>
+        </service>
+
+        <!-- Attempt Repository -->
+        <service id="asker.exercise.repository.attempt" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.attempt.class%">
+            <argument>%asker.exercise.entity.attempt.class%</argument>
+        </service>
+
+        <!-- Exercise Item Repository -->
+        <service id="asker.exercise.repository.item" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.item.class%">
+            <argument>%asker.exercise.entity.item.class%</argument>
+        </service>
+
+        <!-- Test Repository -->
+        <service id="asker.exercise.repository.test" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.test.class%">
+            <argument>%asker.exercise.entity.test.class%</argument>
+        </service>
+
+        <!-- Test Model Repository -->
+        <service id="asker.exercise.repository.test_model" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.test_model.class%">
+            <argument>%asker.exercise.entity.test_model.class%</argument>
+        </service>
+
+        <!-- Test Model Position Repository -->
+        <service id="asker.exercise.repository.test_model_position"
+                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository"
+                 class="%asker.exercise.repository.test_model_position.class%">
+            <argument>%asker.exercise.entity.test_model_position.class%</argument>
+        </service>
+
+        <!-- Test Attempt Repository -->
+        <service id="asker.exercise.repository.test_attempt" factory-service="doctrine.orm.entity_manager" factory-method="getRepository" class="%asker.exercise.repository.test_attempt.class%">
+            <argument>%asker.exercise.entity.test_attempt.class%</argument>
+        </service>
+
+        <!-- General Exercise Service -->
+        <service id="asker.exercise.exercise" class="%asker.exercise.exercise.class%">
+            <call method="setMultipleChoiceService">
+                <argument type="service" id="asker.exercise.multiple_choice"/>
+            </call>
+            <call method="setPairItemsService">
+                <argument type="service" id="asker.exercise.pair_items"/>
+            </call>
+            <call method="setGroupItemsService">
+                <argument type="service" id="asker.exercise.group_items"/>
+            </call>
+            <call method="setOrderItemsService">
+                <argument type="service" id="asker.exercise.order_items"/>
+            </call>
+            <call method="setOpenEndedQuestionService">
+                <argument type="service" id="asker.exercise.open_ended_question"/>
+            </call>
+            <call method="setExerciseModelService">
+                <argument type="service" id="asker.exercise.exercise_model"/>
+            </call>
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+        </service>
+
+        <!-- Generators of specific types of exercises -->
+        <service id="asker.exercise.multiple_choice" class="%asker.exercise.multiple_choice.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="asker.exercise.exercise_resource"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setKnowledgeService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.pair_items" class="%asker.exercise.pair_items.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="asker.exercise.exercise_resource"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setKnowledgeService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.group_items" class="%asker.exercise.group_items.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="asker.exercise.exercise_resource"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setKnowledgeService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.order_items" class="%asker.exercise.order_items.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="asker.exercise.exercise_resource"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setKnowledgeService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.open_ended_question" class="%asker.exercise.open_ended_question.class%">
+            <call method="setExerciseResourceService">
+                <argument type="service" id="asker.exercise.exercise_resource"/>
+            </call>
+            <call method="setFormulaService">
+                <argument type="service" id="asker.exercise.knowledge.formula"/>
+            </call>
+            <call method="setKnowledgeService">
+                <argument type="service" id="asker.exercise.knowledge"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <!-- Stored Exercise -->
+        <service id="asker.exercise.stored_exercise" class="%asker.exercise.stored_exercise.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setStoredExerciseRepository">
+                <argument type="service" id="asker.exercise.repository.stored_exercise"/>
+            </call>
+            <call method="setItemRepository">
+                <argument type="service" id="asker.exercise.repository.item"/>
+            </call>
+            <call method="setExerciseService">
+                <argument type="service" id="asker.exercise.exercise"/>
+            </call>
+            <call method="setExerciseModelService">
+                <argument type="service" id="asker.exercise.exercise_model"/>
+            </call>
+            <call method="setTestAttemptService">
+                <argument type="service" id="asker.exercise.test_attempt"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.item" class="%asker.exercise.item.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setExerciseService">
+                <argument type="service" id="asker.exercise.exercise"/>
+            </call>
+            <call method="setItemRepository">
+                <argument type="service" id="asker.exercise.repository.item"/>
+            </call>
+            <call method="setAnswerRepository">
+                <argument type="service" id="asker.exercise.repository.answer"/>
+            </call>
+            <call method="setStoredExerciseService">
+                <argument type="service" id="asker.exercise.stored_exercise"/>
+            </call>
+            <call method="setAttemptService">
+                <argument type="service" id="asker.exercise.attempt"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.answer" class="%asker.exercise.answer.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setExerciseService">
+                <argument type="service" id="asker.exercise.exercise"/>
+            </call>
+            <call method="setItemService">
+                <argument type="service" id="asker.exercise.item"/>
+            </call>
+            <call method="setAttemptService">
+                <argument type="service" id="asker.exercise.attempt"/>
+            </call>
+            <call method="setAnswerRepository">
+                <argument type="service" id="asker.exercise.repository.answer"/>
+            </call>
+            <call method="setSerializer">
+                <argument type="service" id="asker.api.serializer"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.attempt" class="%asker.exercise.attempt.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setAttemptRepository">
+                <argument type="service" id="asker.exercise.repository.attempt"/>
+            </call>
+            <call method="setStoredExerciseService">
+                <argument type="service" id="asker.exercise.stored_exercise"/>
+            </call>
+            <call method="setTestAttemptService">
+                <argument type="service" id="asker.exercise.test_attempt"/>
+            </call>
+            <call method="setUserService">
+                <argument type="service" id="asker.exercise.user"/>
+            </call>
+        </service>
+
+        <!-- Test -->
+        <service id="asker.exercise.test" class="%asker.exercise.test.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setTestRepository">
+                <argument type="service" id="asker.exercise.repository.test"/>
+            </call>
+            <call method="setTestModelService">
+                <argument type="service" id="asker.exercise.test_model"/>
+            </call>
+            <call method="setStoredExerciseService">
+                <argument type="service" id="asker.exercise.stored_exercise"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.test_model" class="%asker.exercise.test_model.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setTestModelRepository">
+                <argument type="service" id="asker.exercise.repository.test_model"/>
+            </call>
+            <call method="setTestModelPositionRepository">
+                <argument type="service" id="asker.exercise.repository.test_model_position"/>
+            </call>
+            <call method="setUserService">
+                <argument type="service" id="asker.exercise.user"/>
+            </call>
+            <call method="setExerciseModelService">
+                <argument type="service" id="asker.exercise.exercise_model"/>
+            </call>
+        </service>
+
+        <service id="asker.exercise.test_attempt" class="%asker.exercise.test_attempt.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setTestAttemptRepository">
+                <argument type="service" id="asker.exercise.repository.test_attempt"/>
+            </call>
+            <call method="setAttemptService">
+                <argument type="service" id="asker.exercise.attempt"/>
+            </call>
+            <call method="setTestService">
+                <argument type="service" id="asker.exercise.test"/>
+            </call>
+            <call method="setUserService">
+                <argument type="service" id="asker.exercise.user"/>
+            </call>
+        </service>
+
+        <!-- Other services asker.api.serializer-->
+        <service id="asker.api.serializer" class="%asker.exercise.serializer.class%"/>
+    </services>
+
+</container>

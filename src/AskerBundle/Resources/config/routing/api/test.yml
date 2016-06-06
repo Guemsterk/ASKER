@@ -1,0 +1,30 @@
+api_test_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/Test/Test:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_test_view:
+    path:  /{testId}
+    defaults: { _controller: AskerBundle:Api/Test/Test:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        testId: \d+
+
+api_test_attempt_list_by_test:
+    path:  /{testId}/test-attempts/
+    defaults: { _controller: AskerBundle:Api/Test/TestAttemptByTest:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        testId: \d+
+
+api_test_attempt_create:
+    path:  /{testId}/test-attempts/
+    defaults: { _controller: AskerBundle:Api/Test/TestAttemptByTest:create }
+    methods: [POST]
+    requirements:
+        _format: json
+        testId: \d+

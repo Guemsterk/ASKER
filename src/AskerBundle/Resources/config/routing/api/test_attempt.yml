@@ -1,0 +1,30 @@
+api_test_attempt_list:
+    path:  /
+    defaults: { _controller: AskerBundle:Api/Test/TestAttempt:list }
+    methods: [GET]
+    requirements:
+        _format: json
+
+api_test_attempt_view:
+    path:  /{testAttemptId}
+    defaults: { _controller: AskerBundle:Api/Test/TestAttempt:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        testAttemptId: \d+
+
+api_exercise_list_by_test_attempt:
+    path:  /{testAttemptId}/exercises/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/ExerciseByTestAttempt:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        testAttemptId: \d+
+
+api_attempt_list_by_test_attempt:
+    path:  /{testAttemptId}/attempts/
+    defaults: { _controller: AskerBundle:Api/CreatedExercise/AttemptByTestAttempt:list }
+    methods: [GET]
+    requirements:
+        _format: json
+        testAttemptId: \d+

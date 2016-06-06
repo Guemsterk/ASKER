@@ -1,0 +1,14 @@
+api_exercise_attempted_model_view:
+    path: /{exerciseModelId}
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModelAttempted:view }
+    methods: [GET]
+    requirements:
+        _format: json
+        exerciseModelId: \d+
+
+api_exercise_attempted_model_list:
+    path: /
+    defaults: { _controller: AskerBundle:Api/ExerciseModel/ExerciseModelAttempted:list }
+    methods: [GET]
+    requirements:
+        _format: json

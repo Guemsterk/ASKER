@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="asker.exercise.user.class">AskerBundle\Service\User\UserService</parameter>
+        <parameter key="asker.exercise.entity.user.class">AppBundle\Entity\User</parameter>
+        <parameter key="asker.exercise.repository.user.class">AskerBundle\Repository\User\UserRepository</parameter>
+    </parameters>
+
+    <services>
+        <!-- Repositories -->
+        <service id="asker.exercise.repository.user" class="%asker.exercise.repository.user.class%">
+			<factory service="doctrine" method="getRepository" />
+            <argument>%asker.exercise.entity.user.class%</argument>
+        </service>
+
+        <!-- Services -->
+        <service id="asker.exercise.user" class="%asker.exercise.user.class%">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager"/>
+            </call>
+            <call method="setUserRepository">
+                <argument type="service" id="asker.exercise.repository.user"/>
+            </call>
+        </service>
+
+    </services>
+</container>
