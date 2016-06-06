@@ -2,6 +2,13 @@ asker:
     resource: "@AskerBundle/Resources/config/routing.yml"
     prefix:   /
 
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /asker
+        permanent: true
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
