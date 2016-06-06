@@ -1,5 +1,5 @@
 asker_homepage:
-    path:     /asker/
+    path:     /asker/home/
     defaults: { _controller: AskerBundle:Default:index }
 
 api_attempted_exercise_models:

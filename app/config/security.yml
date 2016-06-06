@@ -29,4 +29,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/asker/, roles: ROLE_USER }
+        - { path: ^/asker/home/, roles: ROLE_USER }
